@@ -1,18 +1,8 @@
-import { useState } from "react";
-import { Btn } from "./elements/Btn";
+import React from "react";
+import Router from "./shared/Router";
 
-function App() {
-  const [backgroundColor, setBackgroundColor] = useState("white");
-  const handleClick = () => {
-    setBackgroundColor("red");
-  };
-  return (
-    <>
-      <Btn bgColor={backgroundColor} onClick={handleClick}>
-        sdfdsfs
-      </Btn>
-    </>
-  );
-}
+const App = () => {
+  return <Router />;
+};
 
 export default App;
