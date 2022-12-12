@@ -21,7 +21,7 @@ const Form = () => {
         <InputBox>
           <label>
             <StSpan>내용</StSpan>
-            <StInput type="text" name="content" value={body} onChange={(e)=>setBody(e.target.value)}/>
+            <StInput type="text" name="body" value={body} onChange={(e)=>setBody(e.target.value)}/>
           </label>
         </InputBox>
         <StButton>추가하기</StButton>
