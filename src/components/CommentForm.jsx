@@ -18,8 +18,6 @@ const CommentForm = () => {
   const onChangeHandler = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    //댓글의 내용이 빈 값일 경우 아무것도 리턴하지 않기 위한 코드
-    // if (comment.body === "") return;
     setComment({ [name]: value });
   };
 
@@ -33,21 +31,6 @@ const CommentForm = () => {
     };
     dispatch(__addComment(payload));
   };
-
-  // const [comments, setComments] = useState(null);
-
-  // const getComments = async () => {
-  //   const { data } = await axios.get(`http://localhost:3001/todos/${id}`);
-  //   setComments(data);
-  // };
-
-  // useEffect(() => {
-  //   dispatch(__getTodo(id));
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   getComments();
-  // }, []);
 
   return (
     <StCommentContainer>
