@@ -15,6 +15,7 @@ const Form = () => {
     const param = {
       ...input,
       id: new Date().toString(),
+      comment: [],
     };
     dispatch(__addTodo(param));
     setInput({ title: "", body: "" });

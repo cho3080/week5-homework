@@ -12,34 +12,6 @@
         {
           "commentBody": "asdf",
           "id": "Tue Dec 13 2022 22:58:04 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "aass",
-          "id": "Tue Dec 13 2022 23:00:31 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "d",
-          "id": "Tue Dec 13 2022 23:01:18 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "dssag",
-          "id": "Tue Dec 13 2022 23:02:47 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "asdf",
-          "id": "Tue Dec 13 2022 23:03:34 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "1234",
-          "id": "Tue Dec 13 2022 23:04:12 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "1234",
-          "id": "Tue Dec 13 2022 23:04:51 GMT+0900 (한국 표준시)"
-        },
-        {
-          "commentBody": "ddffs",
-          "id": "Tue Dec 13 2022 23:42:39 GMT+0900 (한국 표준시)"
         }
       ]
     },
@@ -50,53 +22,15 @@
       "comment": []
     },
     {
-      "id": 2,
-      "title": "json-server",
-      "body": "json-server를 배워봅시다.",
-      "comment": []
-    },
-    {
-      "id": 3,
-      "title": "json-server",
-      "body": "json-server를 배워봅시다.",
-      "comment": []
-    },
-    {
-      "title": "af",
-      "body": "awegr",
-      "id": "Tue Dec 13 2022 21:51:16 GMT+0900 (한국 표준시)"
-    },
-    {
-      "title": "warh",
-      "body": "hr",
-      "id": "Tue Dec 13 2022 21:51:19 GMT+0900 (한국 표준시)"
-    }
-  ],
-  "comments": [
-    {
-      "commentId": 0,
-      "commentBody": "어렵네요진짜..",
-      "id": 0
-    },
-    {
-      "commentId": 1,
-      "commentBody": "아니 이게 이해가 된다고?",
-      "id": 0
-    },
-    {
-      "commentId": 2,
-      "commentBody": "나.. 수료할 수 있을까..",
-      "id": 0
-    },
-    {
-      "commentId": 3,
-      "commentBody": "매니저님 뇌 얼마에요? 제가 살게요",
-      "id": 0
-    },
-    {
-      "commentId": 4,
-      "commentBody": "아... 로또나 사자..",
-      "id": 0
+      "title": "ㅁㅈ고",
+      "body": "ㅁㄱㅈ도",
+      "id": "Wed Dec 14 2022 02:21:28 GMT+0900 (한국 표준시)",
+      "comment": [
+        {
+          "commentBody": "ㅇㅇ",
+          "id": "Wed Dec 14 2022 02:21:31 GMT+0900 (한국 표준시)"
+        }
+      ]
     }
   ]
 }
