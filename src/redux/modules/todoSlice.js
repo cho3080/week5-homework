@@ -66,12 +66,6 @@ const todoSlice = createSlice({
       state.error = action.payload;
     },
   },
-  extraReducers: {
-    // [detailTodos.fulfilled]: (state, payload) => {
-    //   // thunk에서 결과로 return된 값
-    //   state.detail = payload;
-    // },
-  },
 });
 
 export const { addTodo } = todoSlice.actions;
