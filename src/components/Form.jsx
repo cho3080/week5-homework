@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { __addTodo } from "../redux/modules/todoSlice";
@@ -8,7 +8,7 @@ const Form = () => {
 
   const {input,handleInput, setInput} = useInput({title: "", body: ""})
 
-  const { isLoading, error, todos } = useSelector((state) => state.todos);
+  const { isLoading, error } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   const addSubmitHandler = (e) => {

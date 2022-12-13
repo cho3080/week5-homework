@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  // { id: "", title: "", body: "", comment: [] }
   todos: [],
   isLoading: false,
   error: null,
@@ -13,7 +12,6 @@ export const __getTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const todos = await axios.get("http://localhost:3001/todos");
-      console.log(todos.data);
       return thunkAPI.fulfillWithValue(todos.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -24,10 +22,8 @@ export const __getTodos = createAsyncThunk(
 export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const todo = await axios.post("http://localhost:3001/todos", payload);
-      console.log(todo);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,8 +36,6 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      //       state.todos = action.payload; 아래 코드와 차이 ?
-      // console.log(action);
       state.todos = action.payload;
     },
   },
