@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
+import CommentForm from "../components/CommentForm";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
@@ -59,6 +60,7 @@ const Detail = () => {
           </DeleteBtn>
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>
         </ButtonWrap>
+        <CommentForm />
       </DetailWrap>
     </>
   );

@@ -53,16 +53,27 @@ export const __addTodo = createAsyncThunk(
   }
 );
 
+export const __addComment = createAsyncThunk(
+  "todos/addComment",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const res = await axios.patch(
+        `http://localhost:3001/todos/${payload.id}`,
+        payload.content
+      );
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 const todoSlice = createSlice({
   name: "todos",
   initialState,
-  reducers: {
-    addTodo: (state, action) => {
-      //       state.todos = action.payload; 아래 코드와 차이 ?
-      // console.log(action);
-      state.todos = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     //__getTodos
     [__getTodos.pending]: (state) => {
@@ -98,6 +109,18 @@ const todoSlice = createSlice({
       state.todos.push(action.payload);
     },
     [__addTodo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // addComment
+    [__addComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__addComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detail.comment = action.payload.data.comment;
+    },
+    [__addComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
