@@ -1,9 +1,27 @@
 {
-  "posts": [
+  "todos": [
     {
       "id": 0,
       "title": "심화주차 공부하자아",
       "body": "너무 어려워어어어어",
+      "comment": []
+    },
+    {
+      "id": 1,
+      "title": "json-server",
+      "body": "json-server를 배워봅시다.",
+      "comment": []
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "body": "json-server를 배워봅시다.",
+      "comment": []
+    },
+    {
+      "id": 3,
+      "title": "json-server",
+      "body": "json-server를 배워봅시다.",
       "comment": []
     }
   ],
