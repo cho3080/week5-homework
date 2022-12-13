@@ -46,7 +46,7 @@ const CommentForm = () => {
       </div>
       <div>
         <div>
-          {detail.comment.map((comment) => (
+          {detail.comment?.map((comment) => (
             <StCommentBox>
               <div>{comment.commentBody}</div>
               <div>
