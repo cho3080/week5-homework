@@ -46,13 +46,11 @@ const CommentForm = () => {
       </div>
       <div>
         <div>
-          {detail.comment.map((comment) => (
+          {detail.comment?.map((comment) => (
             <StCommentBox>
               <div>{comment.commentBody}</div>
-              <div>
-                <button>수정</button>
-                <button>삭제</button>
-              </div>
+              <button>수정</button>
+              <button>삭제</button>
             </StCommentBox>
           ))}
         </div>
