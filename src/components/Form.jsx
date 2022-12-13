@@ -1,13 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { __addTodo } from "../redux/modules/todoSlice";
 
 const Form = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const { isLoading, error, todos } = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
 
   const addSubmitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    dispatch(__addTodo({id: new Date().toString(), title, body}));
+    setTitle("");
+    setBody("");
   };
+
+  if (isLoading) {
+    return <div>로딩중....</div>;
+  }
+
+  if (error) {
+    return <div>확인하기 어려운 에러가 발생했습니다.</div>;
+  }
 
   return (
     <FormBox>
@@ -15,13 +30,23 @@ const Form = () => {
         <InputBox>
           <label>
             <StSpan>제목</StSpan>
-            <StInput type="text" name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+            <StInput
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </label>
         </InputBox>
         <InputBox>
           <label>
             <StSpan>내용</StSpan>
-            <StInput type="text" name="body" value={body} onChange={(e)=>setBody(e.target.value)}/>
+            <StInput
+              type="text"
+              name="body"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+            />
           </label>
         </InputBox>
         <StButton>추가하기</StButton>

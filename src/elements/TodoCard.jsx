@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const TodoCard = () => {
+const TodoCard = ({todo}) => {
   return (
     <CardBox>
-      <StLink to={`detail`}>
+      <StLink to={`detail/${todo.id}`}>
         <DetailLink>상세보기</DetailLink>
       </StLink>
       <Content>
-        <TitleSpan>제목</TitleSpan>
-        <ContentSpan>내용</ContentSpan>
+        <TitleSpan>{todo.title}</TitleSpan>
+        <ContentSpan>{todo.body}</ContentSpan>
       </Content>
     </CardBox>
   );
