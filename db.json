@@ -1,19 +1,37 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": 0,
+      "title": "심화주차 공부하자아",
+      "body": "너무 어려워어어어어",
+      "comment": []
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "commentId": 0,
+      "commentBody": "어렵네요진짜..",
+      "id": 0
+    },
+    {
+      "commentId": 1,
+      "commentBody": "아니 이게 이해가 된다고?",
+      "id": 0
+    },
+    {
+      "commentId": 2,
+      "commentBody": "나.. 수료할 수 있을까..",
+      "id": 0
+    },
+    {
+      "commentId": 3,
+      "commentBody": "매니저님 뇌 얼마에요? 제가 살게요",
+      "id": 0
+    },
+    {
+      "commentId": 4,
+      "commentBody": "아... 로또나 사자..",
+      "id": 0
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
