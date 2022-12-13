@@ -7,26 +7,9 @@
       "comment": []
     },
     {
-      "id": 2,
-      "title": "json-server",
-      "body": "json-server를 배워봅시다.",
-      "comment": []
-    },
-    {
-      "id": 3,
-      "title": "json-server",
-      "body": "json-server를 배워봅시다.",
-      "comment": []
-    },
-    {
-      "id": "Tue Dec 13 2022 20:19:41 GMT+0900 (한국 표준시)",
-      "title": "리액트",
-      "body": "리액트"
-    },
-    {
-      "id": "Tue Dec 13 2022 22:03:15 GMT+0900 (한국 표준시)",
-      "title": "테스트1",
-      "body": "TEST"
+      "id": "Tue Dec 13 2022 22:46:45 GMT+0900 (한국 표준시)",
+      "title": "테스트제목",
+      "body": "테스트내용"
     }
   ]
 }

@@ -17,8 +17,6 @@ const Detail = () => {
 
   const { isLoading, error, detail } = useSelector((state) => state.todos);
 
-  ///////////////////////////////
-
   const [todo, setTodo] = useState({
     title: "",
   });
@@ -39,8 +37,8 @@ const Detail = () => {
 
   return (
     <>
-      <p>디테일 페이지 입니다</p>
       <DetailWrap>
+        <Topline>게시글 상세보기 페이지입니다</Topline>
         <TitleWrap>
           <Title>{detail?.title}</Title>
           <Body>{detail?.body}</Body>
@@ -71,6 +69,12 @@ const DetailWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+
+const Topline = styled.p`
+  color: #616161;
+  font-size: 25px;
+  font-weight: 600;
 `;
 
 const TitleWrap = styled.div`

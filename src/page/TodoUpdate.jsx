@@ -24,11 +24,11 @@ const TodoUpdate = () => {
 
   return (
     <>
-      <p>수정하는 페이지 입니다</p>
       <DetailWrap>
+        <Topline>수정할 내용을 입력해주세요</Topline>
         <TitleWrap>
           <Title>
-            <input
+            <NewInput
               type="text"
               value={input.title}
               name="title"
@@ -36,7 +36,7 @@ const TodoUpdate = () => {
             />
           </Title>
           <Body>
-            <input
+            <NewInput
               type="text"
               value={input.body}
               name="body"
@@ -58,6 +58,12 @@ const TodoUpdate = () => {
 
 export default TodoUpdate;
 
+const Topline = styled.p`
+  color: #616161;
+  font-size: 25px;
+  font-weight: 600;
+`;
+
 const DetailWrap = styled.div`
   padding: 5%;
   display: flex;
@@ -77,6 +83,13 @@ const Title = styled.div`
   font-size: 50px;
   font-weight: 700;
   padding-bottom: 30px;
+`;
+
+const NewInput = styled.input`
+  border: 1px solid gray;
+  width: 200px;
+  height: 30px;
+  border-radius: 7px;
 `;
 
 const Body = styled.div`
