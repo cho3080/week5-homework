@@ -32,6 +32,7 @@
       "id": 0
     },
     {
+<<<<<<< HEAD
       "commentId": 1,
       "commentBody": "아니 이게 이해가 된다고?",
       "id": 0
@@ -50,6 +51,16 @@
       "commentId": 4,
       "commentBody": "아... 로또나 사자..",
       "id": 0
+=======
+      "id": "Tue Dec 13 2022 20:19:41 GMT+0900 (한국 표준시)",
+      "title": "리액트",
+      "body": "리액트"
+    },
+    {
+      "id": "Tue Dec 13 2022 22:03:15 GMT+0900 (한국 표준시)",
+      "title": "테스트1",
+      "body": "TEST"
+>>>>>>> e4e94b15625a746cd86b72dea7184cf58fd3a1dc
     }
   ]
 }
