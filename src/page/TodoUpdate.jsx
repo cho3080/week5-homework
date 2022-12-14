@@ -18,6 +18,12 @@ const TodoUpdate = () => {
     setInput({ ...input, [name]: value });
   };
 
+  const [todoId, setTodoId] = useState();
+  const [editTodo, setEditTodo] = useState({
+    title: input.title,
+    body: input.body, //??
+  });
+
   const onClickEditButtonHandler = (todoId, edit) => {
     axios.patch(`http://localhost:3001/todos/${todoId}`, edit);
   };

@@ -27,7 +27,6 @@ const Detail = () => {
   //   setTodo(data);
   // };
 
-  //삭제하기!
   const onClickDeleteButtonHandler = () => {
     axios.delete(`http://localhost:3001/todos/${id}`);
   };
