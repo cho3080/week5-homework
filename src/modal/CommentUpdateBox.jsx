@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { __updateComment } from "../redux/modules/todoSlice";
 
 const CommentUpdateBox = ({ commentUpdate, setCommentUpdate }) => {
-  console.log(commentUpdate);
   const dispatch = useDispatch();
   const [input, setInput] = useState(commentUpdate.comment);
 
