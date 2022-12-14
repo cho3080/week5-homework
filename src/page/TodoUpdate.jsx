@@ -46,7 +46,7 @@ const TodoUpdate = () => {
         </TitleWrap>
 
         <ButtonWrap>
-          <EditBtn onClick={() => onClickEditButtonHandler("sdf", "sdf")}>
+          <EditBtn onClick={() => onClickEditButtonHandler("", "")}>
             수정완료
           </EditBtn>
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>

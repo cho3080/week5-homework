@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getTodo } from "../redux/modules/todoSlice";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
@@ -21,14 +22,14 @@ const Detail = () => {
     title: "",
   });
 
-  const fetchTodos = async () => {
-    const { data } = await axios.get("http://localhost:3001/todos");
-    setTodo(data);
-  };
+  // const fetchTodos = async () => {
+  //   const { data } = await axios.get("http://localhost:3001/todos");
+  //   setTodo(data);
+  // };
 
   //삭제하기!
-  const onClickDeleteButtonHandler = (todoId) => {
-    axios.delete(`http://localhost:3001/todos/${todoId}`);
+  const onClickDeleteButtonHandler = () => {
+    axios.delete(`http://localhost:3001/todos/${id}`);
   };
 
   if (isLoading) {
@@ -52,9 +53,11 @@ const Detail = () => {
           >
             게시글 수정
           </EditBtn>
-          <DeleteBtn onClick={() => onClickDeleteButtonHandler(todo.id)}>
-            게시글 삭제
-          </DeleteBtn>
+          <Link to={"/"}>
+            <DeleteBtn onClick={onClickDeleteButtonHandler}>
+              게시글 삭제
+            </DeleteBtn>
+          </Link>
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>
         </ButtonWrap>
       </DetailWrap>
