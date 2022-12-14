@@ -52,6 +52,35 @@ export const __addTodo = createAsyncThunk(
   }
 );
 
+export const __deleteTodo = createAsyncThunk(
+  "todos/deleteTodo",
+  async (id, thunkAPI) => {
+    console.log(id);
+    try {
+      const res = await axios.delete(`http://localhost:3001/todos/${id}`);
+      console.log(res);
+      return thunkAPI.fulfillWithValue(id);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __updateTodo = createAsyncThunk(
+  "todos/updateTodo",
+  async (detail, thunkAPI) => {
+    try {
+      const res = await axios.patch(
+        `http://localhost:3001/todos/${detail.id}`,
+        detail
+      );
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const __addComment = createAsyncThunk(
   "todos/addComment",
   async (payload, thunkAPI) => {
@@ -124,6 +153,40 @@ const todoSlice = createSlice({
       state.todos.push(action.payload);
     },
     [__addTodo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // __deleteTodo
+    [__deleteTodo.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteTodo.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action);
+      state.todos = state.todos.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+    },
+    [__deleteTodo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // __updateTodo
+    [__updateTodo.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateTodo.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action);
+      state.todos = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+    },
+    [__updateTodo.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

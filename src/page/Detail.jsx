@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import CommentForm from "../components/CommentForm";
+
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { __getTodo } from "../redux/modules/todoSlice";
+import { __getTodo, __deleteTodo } from "../redux/modules/todoSlice";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import CommentForm from "../components/CommentForm";
 
 const Detail = () => {
   const { id } = useParams();
@@ -17,20 +19,23 @@ const Detail = () => {
   }, [dispatch]);
 
   const { isLoading, error, detail } = useSelector((state) => state.todos);
+<<<<<<< HEAD
   ///////////////////////////////
+=======
+>>>>>>> main
 
   const [todo, setTodo] = useState({
     title: "",
   });
 
-  const fetchTodos = async () => {
-    const { data } = await axios.get("http://localhost:3001/todos");
-    setTodo(data);
-  };
+  // const fetchTodos = async () => {
+  //   const { data } = await axios.get("http://localhost:3001/todos");
+  //   setTodo(data);
+  // };
 
-  //삭제하기!
-  const onClickDeleteButtonHandler = (todoId) => {
-    axios.delete(`http://localhost:3001/todos/${todoId}`);
+  const onClickDeleteButtonHandler = async () => {
+    await dispatch(__deleteTodo(id));
+    navigate("/");
   };
 
   if (isLoading) {
@@ -39,8 +44,9 @@ const Detail = () => {
 
   return (
     <>
-      <p>디테일 페이지 입니다</p>
+      <Header />
       <DetailWrap>
+        <Topline>게시글 상세보기 페이지입니다</Topline>
         <TitleWrap>
           <Title>{detail?.title}</Title>
           <Body>{detail?.body}</Body>
@@ -54,9 +60,11 @@ const Detail = () => {
           >
             게시글 수정
           </EditBtn>
-          <DeleteBtn onClick={() => onClickDeleteButtonHandler(todo.id)}>
+
+          <DeleteBtn onClick={onClickDeleteButtonHandler}>
             게시글 삭제
           </DeleteBtn>
+
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>
         </ButtonWrap>
         <CommentForm />
@@ -72,6 +80,12 @@ const DetailWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+
+const Topline = styled.p`
+  color: #616161;
+  font-size: 25px;
+  font-weight: 600;
 `;
 
 const TitleWrap = styled.div`
