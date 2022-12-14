@@ -17,7 +17,6 @@ const Detail = () => {
   }, [dispatch]);
 
   const { isLoading, error, detail } = useSelector((state) => state.todos);
-
   ///////////////////////////////
 
   const [todo, setTodo] = useState({
