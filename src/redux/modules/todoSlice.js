@@ -69,6 +69,23 @@ export const __addComment = createAsyncThunk(
   }
 );
 
+//댓글삭제
+export const __deleteComment = createAsyncThunk(
+  "todos/deleteComment",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const res = await axios.delete(
+        `http://localhost:3001/todos/${payload.id}`
+      );
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 const todoSlice = createSlice({
   name: "todos",
   initialState,
@@ -119,6 +136,20 @@ const todoSlice = createSlice({
       state.detail.comment = action.payload.data.comment;
     },
     [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // deletComment
+    [__deleteComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detail.comment = state.detail.filter((item) => {
+        return item.id !== action.payload;
+      });
+    },
+    [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

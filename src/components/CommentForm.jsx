@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import todoSlice from "../redux/modules/todoSlice";
 import { useParams } from "react-router-dom";
-import { __getTodo, __addComment } from "../redux/modules/todoSlice";
+import {
+  __getTodo,
+  __addComment,
+  __deleteComment,
+} from "../redux/modules/todoSlice";
 
 const CommentForm = () => {
   const { id } = useParams();
@@ -32,6 +36,34 @@ const CommentForm = () => {
     dispatch(__addComment(payload));
   };
 
+  //삭제버튼 기능
+
+  // const [comments, setcomments] = useState();
+
+  function onClickDeleteButtonHandler() {
+    // if (window.confirm("삭제 하시겠습니까?")) {
+    //     axios(`http://localhost:3001/todos/${comments.commentBody}`, {
+    //       method: "DELETE",
+    //     }).then((res) => {
+    //       if (res.ok) {
+    //         settodo({ comment: 0 });
+    //       }
+    //     });
+    //     console.log(useState);
+    //   }
+    // }
+    const payload = {
+      id: id,
+      content: {
+        ...detail,
+        comment: [...detail.comment, { id }],
+      },
+    };
+
+    dispatch(__deleteComment(payload));
+    console.log(payload);
+  }
+
   return (
     <StCommentContainer>
       <div>
@@ -50,7 +82,7 @@ const CommentForm = () => {
             <StCommentBox>
               <div>{comment.commentBody}</div>
               <button>수정</button>
-              <button>삭제</button>
+              <button onClick={onClickDeleteButtonHandler}>삭제</button>
             </StCommentBox>
           ))}
         </div>
