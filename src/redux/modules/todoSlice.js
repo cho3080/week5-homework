@@ -42,7 +42,6 @@ export const __getTodo = createAsyncThunk(
 export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const todo = await axios.post("http://localhost:3001/todos", payload);
       return thunkAPI.fulfillWithValue(todo.data);
@@ -52,34 +51,74 @@ export const __addTodo = createAsyncThunk(
   }
 );
 
-export const __addComment = createAsyncThunk(
-  "todos/addComment",
-  async (payload, thunkAPI) => {
-    console.log(payload);
+export const __deleteTodo = createAsyncThunk(
+  "todos/deleteTodo",
+  async (id, thunkAPI) => {
     try {
-      const res = await axios.patch(
-        `http://localhost:3001/todos/${payload.id}`,
-        payload.content
-      );
-      console.log(res);
-      return thunkAPI.fulfillWithValue(res);
+      const res = await axios.delete(`http://localhost:3001/todos/${id}`);
+      return thunkAPI.fulfillWithValue(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
   }
 );
 
-//댓글삭제
+export const __updateTodo = createAsyncThunk(
+  "todos/updateTodo",
+  async (detail, thunkAPI) => {
+    try {
+      const res = await axios.patch(
+        `http://localhost:3001/todos/${detail.id}`,
+        detail
+      );
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __addComment = createAsyncThunk(
+  "todos/addComment",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.patch(
+        `http://localhost:3001/todos/${payload.id}`,
+        payload.content
+      );
+      console.log(typeof res);
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __updateComment = createAsyncThunk(
+  "todos/updateComment",
+  async (payload, thunkAPI) => {
+    const res = await axios.patch(
+      `http://localhost:3001/todos/${payload.id}`,
+      payload.updatedDetail
+    );
+
+    try {
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const __deleteComment = createAsyncThunk(
   "todos/deleteComment",
   async (payload, thunkAPI) => {
-    console.log(payload);
+    const res = await axios.patch(
+      `http://localhost:3001/todos/${payload.id}`,
+      payload
+    );
     try {
-      const res = await axios.delete(
-        `http://localhost:3001/todos/${payload.id}`
-      );
-      console.log(res);
-      return thunkAPI.fulfillWithValue(res);
+      return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
@@ -127,26 +166,83 @@ const todoSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    // __deleteTodo
+    [__deleteTodo.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteTodo.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.todos = state.todos.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+    },
+    [__deleteTodo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // __updateTodo
+    [__updateTodo.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateTodo.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.todos = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+    },
+    [__updateTodo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
     // addComment
     [__addComment.pending]: (state) => {
       state.isLoading = true;
     },
     [__addComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.detail.comment = action.payload.data.comment;
+      state.detail.comment = action.payload.comment;
     },
     [__addComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    // deletComment
+    // updateComment
+    [__updateComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detail = action.payload;
+      state.todos = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+    },
+    [__updateComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // deleteComment
     [__deleteComment.pending]: (state) => {
       state.isLoading = true;
     },
+
     [__deleteComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.detail.comment = state.detail.filter((item) => {
-        return item.id !== action.payload;
+      state.detail = action.payload;
+      state.todos = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
       });
     },
     [__deleteComment.rejected]: (state, action) => {
