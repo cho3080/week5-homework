@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
-
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getTodo, __deleteTodo } from "../redux/modules/todoSlice";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import CommentForm from "../components/CommentForm";
 
 const Detail = () => {
@@ -18,16 +15,7 @@ const Detail = () => {
     dispatch(__getTodo(id));
   }, [dispatch]);
 
-  const { isLoading, error, detail } = useSelector((state) => state.todos);
-
-  const [todo, setTodo] = useState({
-    title: "",
-  });
-
-  // const fetchTodos = async () => {
-  //   const { data } = await axios.get("http://localhost:3001/todos");
-  //   setTodo(data);
-  // };
+  const { isLoading, detail } = useSelector((state) => state.todos);
 
   const onClickDeleteButtonHandler = async () => {
     await dispatch(__deleteTodo(id));
@@ -47,7 +35,6 @@ const Detail = () => {
           <Title>{detail?.title}</Title>
           <Body>{detail?.body}</Body>
         </TitleWrap>
-
         <ButtonWrap>
           <EditBtn
             onClick={() => {
@@ -56,11 +43,9 @@ const Detail = () => {
           >
             게시글 수정
           </EditBtn>
-
           <DeleteBtn onClick={onClickDeleteButtonHandler}>
             게시글 삭제
           </DeleteBtn>
-
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>
         </ButtonWrap>
         <CommentForm />

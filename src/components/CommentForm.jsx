@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import { __addComment, __deleteComment } from "../redux/modules/todoSlice";
-import todoSlice from "../redux/modules/todoSlice";
 import CommentUpdateBox from "../modal/CommentUpdateBox";
 
 const CommentForm = () => {
@@ -15,7 +13,7 @@ const CommentForm = () => {
     detail: undefined,
     comment: undefined,
   });
-  const { detail, isLoading, error } = useSelector((state) => state.todos);
+  const { detail } = useSelector((state) => state.todos);
 
   // input
   const [comment, setComment] = useState({ commentBody: "" });
@@ -37,7 +35,6 @@ const CommentForm = () => {
         ],
       },
     };
-    console.log(typeof new Date().getTime().toString());
     dispatch(__addComment(payload));
   };
 
@@ -55,7 +52,6 @@ const CommentForm = () => {
         return item.id !== commentId;
       }),
     };
-    console.log(updatedDetail);
     dispatch(__deleteComment(updatedDetail));
   };
 
@@ -111,7 +107,6 @@ const StCommentContainer = styled.div`
 
 const StCommentBox = styled.div`
   border: 1px solid blue;
-
   display: flex;
   justify-content: space-between;
   align-items: center;

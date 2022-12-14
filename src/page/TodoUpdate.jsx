@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import axios from "axios";
 import { __updateTodo } from "../redux/modules/todoSlice";
-import Header from "../components/Header";
 
 const TodoUpdate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
 
   const [input, setInput] = useState(location.state);
 
@@ -46,7 +43,6 @@ const TodoUpdate = () => {
             />
           </Body>
         </TitleWrap>
-
         <ButtonWrap>
           <EditBtn onClick={() => onClickEditButtonHandler("", "")}>
             수정완료

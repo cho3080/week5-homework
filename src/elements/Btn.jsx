@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 export const Btn = (props) => {
-  console.log(props);
   const { bgColor, w, h, cl, children, onClick } = props;
   const styles = { bgColor, w, h, cl };
   return (
