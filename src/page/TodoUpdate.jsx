@@ -17,8 +17,18 @@ const TodoUpdate = () => {
   };
 
   const onClickEditButtonHandler = async () => {
-    await dispatch(__updateTodo(input));
-    navigate("/");
+    if (input.title.length === 0 && input.body.length === 0) {
+      alert("제목과 내용을 입력해주세요!");
+    } else if (input.title.length === 0) {
+      alert("제목을 입력해주세요!");
+    } else if (input.title.length < 10) {
+      alert("제목은 10자 이상 작성해주셔야 합니다!");
+    } else if (input.body.length === 0) {
+      alert("내용을 작성해주세요!");
+    } else {
+      await dispatch(__updateTodo(input));
+      navigate("/");
+    }
   };
 
   return (
