@@ -14,7 +14,7 @@ const Form = () => {
     e.preventDefault();
     const param = {
       ...input,
-      id: new Date().toString(),
+      id: new Date().getTime().toString(),
       comment: [],
     };
 

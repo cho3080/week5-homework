@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { __addComment } from "../redux/modules/todoSlice";
+import { __addComment, __deleteComment } from "../redux/modules/todoSlice";
 import todoSlice from "../redux/modules/todoSlice";
 import CommentUpdateBox from "../modal/CommentUpdateBox";
 
@@ -31,9 +31,13 @@ const CommentForm = () => {
       id: id,
       content: {
         ...detail,
-        comment: [...detail.comment, { ...comment, id: new Date().toString() }],
+        comment: [
+          ...detail.comment,
+          { ...comment, id: new Date().getTime().toString() },
+        ],
       },
     };
+    console.log(typeof new Date().getTime().toString());
     dispatch(__addComment(payload));
   };
 
@@ -43,20 +47,17 @@ const CommentForm = () => {
     });
   };
 
-  // const onEditComment = () => {
-  //   const payload = {
-  //     id: id,
-  //     content: {
-  //       ...detail,
-  //       comment: [
-  //         ...detail.comment,
-  //         { ...comment, id: new Date().toString(), isDone: false },
-  //       ],
-  //     },
-  //   };
-  //   console.log(payload.content.comment);
-  //   dispatch(__updateComment(payload));
-  // };
+  // 삭제하기
+  const handleDelete = (detail, commentId) => {
+    const updatedDetail = {
+      ...detail,
+      comment: detail.comment.filter((item) => {
+        return item.id !== commentId;
+      }),
+    };
+    console.log(updatedDetail);
+    dispatch(__deleteComment(updatedDetail));
+  };
 
   return (
     <StCommentContainer>
@@ -72,8 +73,8 @@ const CommentForm = () => {
       </div>
       <div>
         <div>
-          {detail.comment?.map((comment) => (
-            <StCommentBox>
+          {detail.comment?.map((comment, idx) => (
+            <StCommentBox key={idx}>
               <div>{comment.commentBody}</div>
               <div>
                 <button
@@ -83,7 +84,9 @@ const CommentForm = () => {
                 >
                   수정
                 </button>
-                <button>삭제</button>
+                <button onClick={() => handleDelete(detail, comment.id)}>
+                  삭제
+                </button>
               </div>
             </StCommentBox>
           ))}
