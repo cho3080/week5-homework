@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import todoSlice from "../redux/modules/todoSlice";
 import { useParams } from "react-router-dom";
-import { __getTodo, __addComment } from "../redux/modules/todoSlice";
+import styled from "styled-components";
+import axios from "axios";
+import { __addComment } from "../redux/modules/todoSlice";
+import todoSlice from "../redux/modules/todoSlice";
+import CommentUpdateBox from "../modal/CommentUpdateBox";
 
 const CommentForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [commentUpdate, setCommentUpdate] = useState({
+    isOpen: false,
+    detail: undefined,
+    comment: undefined,
+  });
   const { detail, isLoading, error } = useSelector((state) => state.todos);
-  console.log(detail);
 
   // input
   const [comment, setComment] = useState({ commentBody: "" });
@@ -32,6 +37,27 @@ const CommentForm = () => {
     dispatch(__addComment(payload));
   };
 
+  const handleUpdateModal = (detail, comment) => {
+    setCommentUpdate((prev) => {
+      return { ...prev, isOpen: !prev.isOpen, detail, comment };
+    });
+  };
+
+  // const onEditComment = () => {
+  //   const payload = {
+  //     id: id,
+  //     content: {
+  //       ...detail,
+  //       comment: [
+  //         ...detail.comment,
+  //         { ...comment, id: new Date().toString(), isDone: false },
+  //       ],
+  //     },
+  //   };
+  //   console.log(payload.content.comment);
+  //   dispatch(__updateComment(payload));
+  // };
+
   return (
     <StCommentContainer>
       <div>
@@ -49,10 +75,24 @@ const CommentForm = () => {
           {detail.comment?.map((comment) => (
             <StCommentBox>
               <div>{comment.commentBody}</div>
-              <button>수정</button>
-              <button>삭제</button>
+              <div>
+                <button
+                  onClick={() => {
+                    handleUpdateModal(detail, comment);
+                  }}
+                >
+                  수정
+                </button>
+                <button>삭제</button>
+              </div>
             </StCommentBox>
           ))}
+          {commentUpdate.isOpen === false ? null : (
+            <CommentUpdateBox
+              commentUpdate={commentUpdate}
+              setCommentUpdate={setCommentUpdate}
+            />
+          )}
         </div>
       </div>
     </StCommentContainer>

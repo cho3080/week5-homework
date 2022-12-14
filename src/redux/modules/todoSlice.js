@@ -85,6 +85,7 @@ export const __addComment = createAsyncThunk(
   "todos/addComment",
   async (payload, thunkAPI) => {
     console.log(payload);
+    console.log(payload.content);
     try {
       const res = await axios.patch(
         `http://localhost:3001/todos/${payload.id}`,
@@ -92,6 +93,22 @@ export const __addComment = createAsyncThunk(
       );
       console.log(res);
       return thunkAPI.fulfillWithValue(res);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __updateComment = createAsyncThunk(
+  "todos/updateComment",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    const res = await axios.patch(
+      `http://localhost:3001/todos/${payload.id}`,
+      payload.updatedDetail
+    );
+    return thunkAPI.fulfillWithValue(res.data);
+    try {
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
@@ -182,6 +199,25 @@ const todoSlice = createSlice({
       state.detail.comment = action.payload.data.comment;
     },
     [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // updateComment
+    [__updateComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detail = action.payload;
+      state.todos = state.todos.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+    },
+    [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
