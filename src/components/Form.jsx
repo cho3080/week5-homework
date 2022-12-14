@@ -51,8 +51,6 @@ const Form = () => {
               name="title"
               value={input.title}
               onChange={(e) => handleInput(e)}
-              // required
-              // minLength="10"
               placeholder="10자 이상 작성해주세요."
             />
           </label>
@@ -65,7 +63,6 @@ const Form = () => {
               name="body"
               value={input.body}
               onChange={(e) => handleInput(e)}
-              // required
             />
           </label>
         </InputBox>
