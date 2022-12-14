@@ -54,8 +54,10 @@ export const __addTodo = createAsyncThunk(
 export const __deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, thunkAPI) => {
+    console.log(id);
     try {
       const res = await axios.delete(`http://localhost:3001/todos/${id}`);
+      console.log(res);
       return thunkAPI.fulfillWithValue(id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -171,6 +173,7 @@ const todoSlice = createSlice({
     },
     [__deleteTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log(action);
       state.todos = state.todos.filter((item) => {
         return item.id !== action.payload.id;
       });
@@ -185,6 +188,7 @@ const todoSlice = createSlice({
     },
     [__updateTodo.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log(action);
       state.todos = state.todos.map((item) => {
         if (item.id === action.payload.id) {
           return action.payload;

@@ -59,21 +59,6 @@ const CommentForm = () => {
     dispatch(__deleteComment(updatedDetail));
   };
 
-  // const onEditComment = () => {
-  //   const payload = {
-  //     id: id,
-  //     content: {
-  //       ...detail,
-  //       comment: [
-  //         ...detail.comment,
-  //         { ...comment, id: new Date().toString(), isDone: false },
-  //       ],
-  //     },
-  //   };
-  //   console.log(payload.content.comment);
-  //   dispatch(__updateComment(payload));
-  // };
-
   return (
     <StCommentContainer>
       <div>
