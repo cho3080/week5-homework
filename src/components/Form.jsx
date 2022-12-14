@@ -6,8 +6,8 @@ import { useInput } from "../hooks/useInput";
 
 const Form = () => {
   const { input, handleInput, setInput } = useInput({ title: "", body: "" });
-
   const { isLoading, error } = useSelector((state) => state.todos);
+
   const dispatch = useDispatch();
 
   const addSubmitHandler = (e) => {
@@ -17,8 +17,19 @@ const Form = () => {
       id: new Date().getTime().toString(),
       comment: [],
     };
-    dispatch(__addTodo(param));
-    setInput({ title: "", body: "" });
+
+    if (input.title.length === 0 && input.body.length === 0) {
+      alert("제목과 내용을 입력해주세요!");
+    } else if (input.title.length === 0) {
+      alert("제목을 입력해주세요!");
+    } else if (input.title.length < 10) {
+      alert("제목은 10자 이상 작성해주셔야 합니다!");
+    } else if (input.body.length === 0) {
+      alert("내용을 작성해주세요!");
+    } else {
+      dispatch(__addTodo(param));
+      setInput({ title: "", body: "" });
+    }
   };
 
   if (isLoading) {
@@ -40,6 +51,7 @@ const Form = () => {
               name="title"
               value={input.title}
               onChange={(e) => handleInput(e)}
+              placeholder="10자 이상 작성해주세요."
             />
           </label>
         </InputBox>
