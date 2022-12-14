@@ -86,7 +86,6 @@ export const __addComment = createAsyncThunk(
         `http://localhost:3001/todos/${payload.id}`,
         payload.content
       );
-      console.log(typeof res);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -113,11 +112,11 @@ export const __updateComment = createAsyncThunk(
 export const __deleteComment = createAsyncThunk(
   "todos/deleteComment",
   async (payload, thunkAPI) => {
-    const res = await axios.patch(
-      `http://localhost:3001/todos/${payload.id}`,
-      payload
-    );
     try {
+      const res = await axios.patch(
+        `http://localhost:3001/todos/${payload.id}`,
+        payload
+      );
       return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
