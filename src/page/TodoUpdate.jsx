@@ -1,31 +1,27 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useNavigate, useParams, useLocation } from "react-router";
 import axios from "axios";
+import { __updateTodo } from "../redux/modules/todoSlice";
+import Header from "../components/Header";
 
 const TodoUpdate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const { state } = useLocation();
-  console.log(state);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
 
-  const [input, setInput] = useState(state);
+  const [input, setInput] = useState(location.state);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const [todoId, setTodoId] = useState();
-  const [editTodo, setEditTodo] = useState({
-    title: input.title,
-    body: input.body, //??
-  });
-
-  const onClickEditButtonHandler = (todoId, edit) => {
-    axios.patch(`http://localhost:3001/todos/${todoId}`, edit);
+  const onClickEditButtonHandler = async () => {
+    await dispatch(__updateTodo(input));
+    navigate("/");
   };
 
   return (

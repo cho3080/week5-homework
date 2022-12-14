@@ -1,36 +1,22 @@
 {
   "todos": [
     {
-      "id": 0,
-      "title": "심화주차 공부하자아",
-      "body": "너무 어려워어어어어",
-      "comment": [
-        {
-          "commentBody": "dd",
-          "id": "2022-12-13T13:53:05.711Z"
-        },
-        {
-          "commentBody": "asdf",
-          "id": "Tue Dec 13 2022 22:58:04 GMT+0900 (한국 표준시)"
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "title": "json-server",
-      "body": "json-server를 배워봅시다.",
+      "title": "hahah",
+      "body": "hohoho",
+      "id": "Wed Dec 14 2022 20:22:51 GMT+0900 (한국 표준시)",
       "comment": []
     },
     {
-      "title": "ㅁㅈ고",
-      "body": "ㅁㄱㅈ도",
-      "id": "Wed Dec 14 2022 02:21:28 GMT+0900 (한국 표준시)",
-      "comment": [
-        {
-          "commentBody": "ㅇㅇ",
-          "id": "Wed Dec 14 2022 02:21:31 GMT+0900 (한국 표준시)"
-        }
-      ]
+      "title": "123",
+      "body": "55",
+      "id": "Wed Dec 14 2022 20:33:35 GMT+0900 (한국 표준시)",
+      "comment": []
+    },
+    {
+      "title": "aaaa",
+      "body": "vvvv333",
+      "id": "Wed Dec 14 2022 20:38:51 GMT+0900 (한국 표준시)",
+      "comment": []
     }
   ]
 }

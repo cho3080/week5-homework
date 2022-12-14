@@ -4,7 +4,7 @@ import CommentForm from "../components/CommentForm";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { __getTodo } from "../redux/modules/todoSlice";
+import { __getTodo, __deleteTodo } from "../redux/modules/todoSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -28,8 +28,9 @@ const Detail = () => {
   //   setTodo(data);
   // };
 
-  const onClickDeleteButtonHandler = () => {
-    axios.delete(`http://localhost:3001/todos/${id}`);
+  const onClickDeleteButtonHandler = async () => {
+    await dispatch(__deleteTodo(id));
+    navigate("/");
   };
 
   if (isLoading) {
@@ -38,6 +39,7 @@ const Detail = () => {
 
   return (
     <>
+      <Header />
       <DetailWrap>
         <Topline>게시글 상세보기 페이지입니다</Topline>
         <TitleWrap>
@@ -53,11 +55,11 @@ const Detail = () => {
           >
             게시글 수정
           </EditBtn>
-          <Link to={"/"}>
-            <DeleteBtn onClick={onClickDeleteButtonHandler}>
-              게시글 삭제
-            </DeleteBtn>
-          </Link>
+
+          <DeleteBtn onClick={onClickDeleteButtonHandler}>
+            게시글 삭제
+          </DeleteBtn>
+
           <GoBack onClick={() => navigate(-1)}>뒤로가기</GoBack>
         </ButtonWrap>
         <CommentForm />
