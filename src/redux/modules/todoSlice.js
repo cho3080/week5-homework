@@ -107,8 +107,8 @@ export const __updateComment = createAsyncThunk(
       `http://localhost:3001/todos/${payload.id}`,
       payload.updatedDetail
     );
-    return thunkAPI.fulfillWithValue(res.data);
     try {
+      return thunkAPI.fulfillWithValue(res.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
