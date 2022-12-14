@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { __addTodo } from "../redux/modules/todoSlice";
+import { useInput } from "../hooks/useInput";
 
 const Form = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const { isLoading, error, todos } = useSelector((state) => state.todos);
+  const { input, handleInput, setInput } = useInput({ title: "", body: "" });
+
+  const { isLoading, error } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   const addSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addTodo({ id: new Date().toString(), title, body }));
-    setTitle("");
-    setBody("");
+    const param = {
+      ...input,
+      id: new Date().toString(),
+      comment: [],
+    };
+    dispatch(__addTodo(param));
+    setInput({ title: "", body: "" });
   };
 
   if (isLoading) {
@@ -33,8 +38,8 @@ const Form = () => {
             <StInput
               type="text"
               name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={input.title}
+              onChange={(e) => handleInput(e)}
             />
           </label>
         </InputBox>
@@ -44,8 +49,8 @@ const Form = () => {
             <StInput
               type="text"
               name="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
+              value={input.body}
+              onChange={(e) => handleInput(e)}
             />
           </label>
         </InputBox>
