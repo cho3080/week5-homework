@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import CommentForm from "../components/CommentForm";
+
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { __getTodo, __deleteTodo } from "../redux/modules/todoSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import CommentForm from "../components/CommentForm";
 
 const Detail = () => {
   const { id } = useParams();

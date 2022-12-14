@@ -10,7 +10,12 @@
       "title": "123",
       "body": "55",
       "id": "Wed Dec 14 2022 20:33:35 GMT+0900 (한국 표준시)",
-      "comment": []
+      "comment": [
+        {
+          "commentBody": "we",
+          "id": "Wed Dec 14 2022 20:58:28 GMT+0900 (한국 표준시)"
+        }
+      ]
     },
     {
       "title": "aaaa",
