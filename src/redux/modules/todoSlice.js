@@ -17,7 +17,7 @@ export const __getTodos = createAsyncThunk(
   "todos/getTodos",
   async (payload, thunkAPI) => {
     try {
-      const todos = await axios.get("https://test-event.herokuapp.com/todos");
+      const todos = await axios.get(`{REACT_APP_URL}/todos`);
       return thunkAPI.fulfillWithValue(todos.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,7 +43,10 @@ export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.post("https://test-event.herokuapp.com/todos", payload);
+      const todo = await axios.post(
+        "https://test-event.herokuapp.com/todos",
+        payload
+      );
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +58,9 @@ export const __deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, thunkAPI) => {
     try {
-      const res = await axios.delete(`https://test-event.herokuapp.com/todos/${id}`);
+      const res = await axios.delete(
+        `https://test-event.herokuapp.com/todos/${id}`
+      );
       if (res.status === 200) {
         return thunkAPI.fulfillWithValue(id);
       } else {
