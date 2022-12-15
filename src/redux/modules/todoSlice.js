@@ -17,7 +17,7 @@ export const __getTodos = createAsyncThunk(
   "todos/getTodos",
   async (payload, thunkAPI) => {
     try {
-      const todos = await axios.get(`${process.env.REACT_APP_PORT}`);
+      const todos = await axios.get(`${process.env.REACT_APP_PORT}/todos`);
       return thunkAPI.fulfillWithValue(todos.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -30,7 +30,7 @@ export const __getTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_PORT}/${payload}`
+        `${process.env.REACT_APP_PORT}/todos${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -43,7 +43,7 @@ export const __addTodo = createAsyncThunk(
   "todos/addTodo",
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.post(`${process.env.REACT_APP_PORT}`, payload);
+      const todo = await axios.post(`${process.env.REACT_APP_PORT}/todos`, payload);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,7 +55,7 @@ export const __deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, thunkAPI) => {
     try {
-      const res = await axios.delete(`${process.env.REACT_APP_PORT}/${id}`);
+      const res = await axios.delete(`${process.env.REACT_APP_PORT}/todos/${id}`);
       if (res.status === 200) {
         return thunkAPI.fulfillWithValue(id);
       } else {
@@ -72,7 +72,7 @@ export const __updateTodo = createAsyncThunk(
   async (detail, thunkAPI) => {
     try {
       const res = await axios.patch(
-        `${process.env.REACT_APP_PORT}/${detail.id}`,
+        `${process.env.REACT_APP_PORT}/todos/${detail.id}`,
         detail
       );
       return thunkAPI.fulfillWithValue(res.data);
@@ -87,7 +87,7 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await axios.patch(
-        `${process.env.REACT_APP_PORT}/${payload.id}`,
+        `${process.env.REACT_APP_PORT}/todos/${payload.id}`,
         payload.content
       );
       return thunkAPI.fulfillWithValue(res.data);
@@ -101,7 +101,7 @@ export const __updateComment = createAsyncThunk(
   "todos/updateComment",
   async (payload, thunkAPI) => {
     const res = await axios.patch(
-      `${process.env.REACT_APP_PORT}/${payload.id}`,
+      `${process.env.REACT_APP_PORT}/todos/${payload.id}`,
       payload.updatedDetail
     );
 
@@ -118,7 +118,7 @@ export const __deleteComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await axios.patch(
-        `${process.env.REACT_APP_PORT}/${payload.id}`,
+        `${process.env.REACT_APP_PORT}/todos/${payload.id}`,
         payload
       );
       return thunkAPI.fulfillWithValue(res.data);
