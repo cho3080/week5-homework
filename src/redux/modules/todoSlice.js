@@ -17,7 +17,7 @@ export const __getTodos = createAsyncThunk(
   "todos/getTodos",
   async (payload, thunkAPI) => {
     try {
-      const todos = await axios.get(`{REACT_APP_URL}/todos`);
+      const todos = await axios.get(`{process.env.REACT_APP_URL}/todos`);
       return thunkAPI.fulfillWithValue(todos.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
